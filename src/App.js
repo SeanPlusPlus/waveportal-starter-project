@@ -4,6 +4,7 @@ import './App.css';
 import abi from './utils/WavePortal.json';
 
 const App = () => {
+  const [count, setCount] = useState(null);
   const [currentAccount, setCurrentAccount] = useState("");
   const contractAddress = '0xf7BFa193035855DF416AeC3BAd97c6672142fC6C';
   const contractABI = abi.abi;
@@ -54,6 +55,23 @@ const App = () => {
     }
   }
 
+  const displayCount = async () => {
+    try {
+      const { ethereum } = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+        let count = await wavePortalContract.getTotalWaves();
+        console.log("Retrieved total wave count...", count.toNumber());
+        setCount(count.toNumber());
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const wave = async () => {
     try {
       const { ethereum } = window;
@@ -76,6 +94,7 @@ const App = () => {
         console.log("Mined -- ", waveTxn.hash);
 
         count = await wavePortalContract.getTotalWaves();
+        setCount(count.toNumber());
         console.log("Retrieved total wave count...", count.toNumber());
       } else {
         console.log("Ethereum object doesn't exist!");
@@ -87,17 +106,20 @@ const App = () => {
 
   useEffect(() => {
     checkIfWalletIsConnected();
+    displayCount();
   }, [])
   
   return (
     <div className="mainContainer">
       <div className="dataContainer">
         <div className="header">
-        <span role="img" aria-label="wave">👋</span> Hey there!
+          <div className="count">
+            {count} <span role="img" aria-label="wave">👋</span>&#39; so far!!!
+          </div>
         </div>
 
         <div className="bio">
-          I am Sean and I worked at Disney Digital Technology, pretty cool right? Connect your Ethereum wallet and wave at me!
+          I am Sean and I worked at Disney digital media, pretty cool right? Connect your Ethereum wallet and wave at me!
         </div>
 
         <button className="waveButton" onClick={wave}>
