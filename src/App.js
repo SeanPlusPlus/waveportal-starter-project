@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
-import dotenv from 'dotenv'
 import './App.css';
+import abi from './utils/WavePortal.json';
 
-dotenv.config();
-
-const { WAVE_PORTAL_ADDRESS } = process.env;
+console.log('*', WAVE_PORTAL_ADDRESS );
 
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
-  const contractAddress = WAVE_PORTAL_ADDRESS;
+  const contractAddress = '0xf7BFa193035855DF416AeC3BAd97c6672142fC6C';
+  const contractABI = abi.abi;
   
   const checkIfWalletIsConnected = async () => {
     try {
