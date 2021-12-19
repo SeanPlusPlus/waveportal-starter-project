@@ -5,6 +5,7 @@ import abi from './utils/WavePortal.json';
 
 const App = () => {
   const [count, setCount] = useState(null);
+  const [mining, setMining] = useState(false);
   const [currentAccount, setCurrentAccount] = useState("");
   const contractAddress = '0xf7BFa193035855DF416AeC3BAd97c6672142fC6C';
   const contractABI = abi.abi;
@@ -88,6 +89,7 @@ const App = () => {
         * Execute the actual wave from your smart contract
         */
         const waveTxn = await wavePortalContract.wave();
+        setMining(true);
         console.log("Mining...", waveTxn.hash);
 
         await waveTxn.wait();
@@ -95,6 +97,7 @@ const App = () => {
 
         count = await wavePortalContract.getTotalWaves();
         setCount(count.toNumber());
+        setMining(false);
         console.log("Retrieved total wave count...", count.toNumber());
       } else {
         console.log("Ethereum object doesn't exist!");
@@ -122,7 +125,7 @@ const App = () => {
           I am Sean and I worked at Disney digital media, pretty cool right? Connect your Ethereum wallet and wave at me!
         </div>
 
-        <button className="waveButton" onClick={wave}>
+        <button className="waveButton" onClick={wave} disabled={mining}>
           Wave at Me
         </button>
         
