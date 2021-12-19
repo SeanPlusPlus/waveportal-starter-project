@@ -3,8 +3,6 @@ import { ethers } from "ethers";
 import './App.css';
 import abi from './utils/WavePortal.json';
 
-console.log('*', WAVE_PORTAL_ADDRESS );
-
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const contractAddress = '0xf7BFa193035855DF416AeC3BAd97c6672142fC6C';
@@ -83,7 +81,7 @@ const App = () => {
     <div className="mainContainer">
       <div className="dataContainer">
         <div className="header">
-        👋 Hey there!
+        <span role="img" aria-label="wave">👋</span> Hey there!
         </div>
 
         <div className="bio">
