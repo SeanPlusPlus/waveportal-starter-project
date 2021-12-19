@@ -179,15 +179,20 @@ const App = () => {
       <div className="dataContainer">
         <div className="header">
           <div className="count">
-            {count} <span role="img" aria-label="wave">👋</span>&#39; so far!!!
+            {!count &&
+              <span role="img" aria-label="wave">👋</span>
+            }
+            {count &&
+              <>{count} <span role="img" aria-label="wave">👋</span>&#39; so far!!!</>
+            }
           </div>
         </div>
 
         <div className="bio">
-          Hiya! I am <a href="" target="_blank">Sean</a> and I work at Disney digital media.<br />
-          This is a <a href="https://github.com/SeanPlusPlus/waveportal-starter-project" target="_blank">prototype I am hacking together</a> based on <a href="https://app.buildspace.so/projects/CO02cf0f1c-f996-4f50-9669-cf945ca3fb0b/lessons/LEe9f04c2e-fe9c-4e87-81b2-efb677a1720c" target="_blank">this tutorial</a>.<br />
-          Connect your Ethereum wallet, craft a message, and wave at me!<br />
-          To start, you probably should <a href="https://web3hackathon.vercel.app/how-to" target="_blank">follow this</a> (mint an NFT there while you're at it).
+          Hiya there! I am <a href="" target="_blank">Sean</a> and I work at Disney digital media.
+          This is a <a href="https://github.com/SeanPlusPlus/waveportal-starter-project" target="_blank">prototype I am hacking together</a> based on <a href="https://app.buildspace.so/projects/CO02cf0f1c-f996-4f50-9669-cf945ca3fb0b/lessons/LEe9f04c2e-fe9c-4e87-81b2-efb677a1720c" target="_blank">this tutorial</a>.
+          Connect your Ethereum wallet, craft a message, and wave at me!
+          To start, you probably should <a href="https://web3hackathon.vercel.app/how-to" target="_blank">follow this</a> (you can go and mint your very own 🏈 NFT there while you're at it).
         </div>
 
         <input onChange={e => setMessage(e.target.value)} value={message} disabled={mining} className="form-control form-control-lg" type="text" placeholder="Message" name="message" autoComplete="off"></input>
@@ -213,7 +218,7 @@ const App = () => {
           {allWaves.map((wave, index) => {
             return (
               <div key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
-                <div>Address: {wave.address}</div>
+                <div className="address">Address: {wave.address}</div>
                 <div>Time: {wave.timestamp.toString()}</div>
                 <div>Message: {wave.message}</div>
               </div>)
