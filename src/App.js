@@ -7,7 +7,7 @@ const App = () => {
   const [count, setCount] = useState(null);
   const [mining, setMining] = useState(false);
   const [currentAccount, setCurrentAccount] = useState("");
-  const contractAddress = '0xf7BFa193035855DF416AeC3BAd97c6672142fC6C';
+  const contractAddress = '0xd815b3586560Ee3fe6dE2E900AE6d5037DFd38A5';
   const contractABI = abi.abi;
   
   const checkIfWalletIsConnected = async () => {
