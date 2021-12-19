@@ -126,8 +126,15 @@ const App = () => {
         </div>
 
         <button className="waveButton" onClick={wave} disabled={mining}>
-          Wave at Me
+          {!mining && `Wave at Me`}
+          {mining && `Mining ...`}
         </button>
+
+        {mining && (
+          <div className="mining">
+            <span role="img" aria-label="wave">⏳</span>
+          </div>
+        )}
         
         {/*
         * If there is no currentAccount render this button
