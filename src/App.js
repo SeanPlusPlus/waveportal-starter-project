@@ -28,6 +28,7 @@ const App = () => {
         const account = accounts[0];
         console.log("Found an authorized account:", account);
         setCurrentAccount(account);
+        getAllWaves();
       } else {
         console.log("No authorized account found")
       }
@@ -100,6 +101,19 @@ const App = () => {
         setCount(count.toNumber());
         setMining(false);
         console.log("Retrieved total wave count...", count.toNumber());
+
+        const waves = await wavePortalContract.getAllWaves();
+        let wavesCleaned = [];
+        waves.forEach(wave => {
+          wavesCleaned.push({
+            address: wave.waver,
+            timestamp: new Date(wave.timestamp * 1000),
+            message: wave.message
+          });
+        });
+        wavesCleaned.reverse();
+        console.log('wavesCleaned', wavesCleaned);
+        setAllWaves(wavesCleaned);
       } else {
         console.log("Ethereum object doesn't exist!");
       }
@@ -138,6 +152,8 @@ const App = () => {
         /*
          * Store our data in React State
          */
+        console.log('wavesCleaned', wavesCleaned);
+        wavesCleaned.reverse();
         setAllWaves(wavesCleaned);
       } else {
         console.log("Ethereum object doesn't exist!")
@@ -150,7 +166,6 @@ const App = () => {
   useEffect(() => {
     checkIfWalletIsConnected();
     displayCount();
-    getAllWaves();
   }, [])
   
   return (
@@ -171,20 +186,28 @@ const App = () => {
           {mining && `Mining ...`}
         </button>
 
-        {mining && (
-          <div className="mining">
-            <span role="img" aria-label="wave">⏳</span>
-          </div>
-        )}
+        {!mining &&
+          <span className="smiling">
+            <span role="img" aria-label="smile">😃</span>
+          </span>
+        }
 
-        {allWaves.map((wave, index) => {
-          return (
-            <div key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
-              <div>Address: {wave.address}</div>
-              <div>Time: {wave.timestamp.toString()}</div>
-              <div>Message: {wave.message}</div>
-            </div>)
-        })}
+        {mining &&
+          <span className="mining">
+            <span role="img" aria-label="waiting">⏳</span>
+          </span>
+        }
+
+        <div className="allWaves">
+          {allWaves.map((wave, index) => {
+            return (
+              <div key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
+                <div>Address: {wave.address}</div>
+                <div>Time: {wave.timestamp.toString()}</div>
+                <div>Message: {wave.message}</div>
+              </div>)
+          })}
+        </div>
         
         {/*
         * If there is no currentAccount render this button

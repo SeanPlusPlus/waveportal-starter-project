@@ -33,6 +33,14 @@
   border-radius: 5px;
 }
 
+.smiling {
+  text-align: center;
+  margin: 0px auto;
+  width: 50px;
+  height: 50px;
+  font-size: 3rem;
+}
+
 .mining {
   text-align: center;
   margin: 0px auto;
@@ -56,4 +64,8 @@
     to {
         transform:rotate(360deg);
     }
+}
+
+.allWaves {
+  margin-top: 10px;
 }
