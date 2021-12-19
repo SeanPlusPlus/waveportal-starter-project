@@ -184,13 +184,13 @@ const App = () => {
         </div>
 
         <div className="bio">
-          Hello there! I am <a href="" target="_blank">Sean</a> and I work at Disney digital media.<br />
+          Hiya! I am <a href="" target="_blank">Sean</a> and I work at Disney digital media.<br />
           This is a <a href="https://github.com/SeanPlusPlus/waveportal-starter-project" target="_blank">prototype I am hacking together</a> based on <a href="https://app.buildspace.so/projects/CO02cf0f1c-f996-4f50-9669-cf945ca3fb0b/lessons/LEe9f04c2e-fe9c-4e87-81b2-efb677a1720c" target="_blank">this tutorial</a>.<br />
           Connect your Ethereum wallet, craft a message, and wave at me!<br />
           To start, you probably should <a href="https://web3hackathon.vercel.app/how-to" target="_blank">follow this</a> (mint an NFT there while you're at it).
         </div>
 
-        <input onChange={e => setMessage(e.target.value)} value={message} disabled={mining} className="form-control form-control-lg" type="text" placeholder="Message" name="message" autocomplete="off"></input>
+        <input onChange={e => setMessage(e.target.value)} value={message} disabled={mining} className="form-control form-control-lg" type="text" placeholder="Message" name="message" autoComplete="off"></input>
 
         <button className="waveButton" onClick={wave} disabled={mining}>
           {!mining && `Wave at Me`}
