@@ -6,10 +6,13 @@ import abi from './utils/WavePortal.json';
 const App = () => {
   const [count, setCount] = useState(null);
   const [mining, setMining] = useState(false);
+  const [message, setMessage] = useState("");
   const [currentAccount, setCurrentAccount] = useState("");
   const [allWaves, setAllWaves] = useState([]);
   const contractAddress = '0xd815b3586560Ee3fe6dE2E900AE6d5037DFd38A5';
   const contractABI = abi.abi;
+
+
   
   const checkIfWalletIsConnected = async () => {
     try {
@@ -90,7 +93,8 @@ const App = () => {
         /*
         * Execute the actual wave from your smart contract
         */
-        const waveTxn = await wavePortalContract.wave("this is a message")
+        console.log("message", message);
+        const waveTxn = await wavePortalContract.wave(message);
         setMining(true);
         console.log("Mining...", waveTxn.hash);
 
@@ -114,6 +118,8 @@ const App = () => {
         wavesCleaned.reverse();
         console.log('wavesCleaned', wavesCleaned);
         setAllWaves(wavesCleaned);
+
+        setMessage("");
       } else {
         console.log("Ethereum object doesn't exist!");
       }
@@ -178,8 +184,12 @@ const App = () => {
         </div>
 
         <div className="bio">
-          I am Sean and I worked at Disney digital media, pretty cool right? Connect your Ethereum wallet and wave at me!
+          Hello there! I am <a href="" target="_blank">Sean</a> and I work at Disney digital media.<br />
+          This is a <a href="https://github.com/SeanPlusPlus/waveportal-starter-project" target="_blank">prototype I am hacking together</a> based on <a href="https://app.buildspace.so/projects/CO02cf0f1c-f996-4f50-9669-cf945ca3fb0b/lessons/LEe9f04c2e-fe9c-4e87-81b2-efb677a1720c" target="_blank">this buildspace tutorial</a>.<br />
+          Connect your Ethereum wallet, craft a message, and wave at me!
         </div>
+
+        <input onChange={e => setMessage(e.target.value)} value={message} disabled={mining} className="form-control form-control-lg" type="text" placeholder="Message" name="message" autocomplete="off"></input>
 
         <button className="waveButton" onClick={wave} disabled={mining}>
           {!mining && `Wave at Me`}
