@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 const App = () => {
-  const [showModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [count, setCount] = useState(null);
   const [mining, setMining] = useState(false);
   const [message, setMessage] = useState("");
@@ -132,6 +132,7 @@ const App = () => {
       }
     } catch (error) {
       console.log(error)
+      setShowModal(true)
     }
   }
 
