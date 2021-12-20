@@ -3,7 +3,12 @@ import { ethers } from "ethers";
 import './App.css';
 import abi from './utils/WavePortal.json';
 
+
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
 const App = () => {
+  const [showModal] = useState(true);
   const [count, setCount] = useState(null);
   const [mining, setMining] = useState(false);
   const [message, setMessage] = useState("");
@@ -12,7 +17,9 @@ const App = () => {
   const contractAddress = '0x39f257618a4AD5391ecaAe9A675FAc59a72dB837';
   const contractABI = abi.abi;
 
-
+  const handleClose = () => {
+    window.location.reload(false);
+  }
   
   const checkIfWalletIsConnected = async () => {
     try {
@@ -239,6 +246,17 @@ const App = () => {
           </button>
         )}
       </div>
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Heads Up!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body><span role="img" aria-label="warn">⛔️</span> Must wait 30 seconds before waving again.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Got it
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
