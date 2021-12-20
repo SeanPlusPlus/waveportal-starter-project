@@ -9,7 +9,7 @@ const App = () => {
   const [message, setMessage] = useState("");
   const [currentAccount, setCurrentAccount] = useState("");
   const [allWaves, setAllWaves] = useState([]);
-  const contractAddress = '0xDf8e8131164545bD72ba9DA39503f0c40ECcF828';
+  const contractAddress = '0x8A6D7EdF4f014b3EAC32420a5b8303C0274a1920';
   const contractABI = abi.abi;
 
 
