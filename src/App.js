@@ -180,6 +180,29 @@ const App = () => {
   useEffect(() => {
     checkIfWalletIsConnected();
     displayCount();
+
+    let wavePortalContract;
+
+    const onNewWave = (from, timestamp, message) => {
+      console.log('*** NewWave', from, timestamp, message);
+      displayCount();
+      getAllWaves();
+    };
+
+    if (window.ethereum) {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+
+      wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+      wavePortalContract.on('NewWave', onNewWave);
+    }
+
+    return () => {
+      if (wavePortalContract) {
+        wavePortalContract.off('NewWave', onNewWave);
+      }
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
