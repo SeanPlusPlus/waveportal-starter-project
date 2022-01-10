@@ -17,6 +17,8 @@ const App = () => {
   const contractAddress = '0x39f257618a4AD5391ecaAe9A675FAc59a72dB837';
   const contractABI = abi.abi;
 
+  console.log('*', contractABI);
+
   const handleClose = () => {
     window.location.reload(false);
   }
